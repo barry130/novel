@@ -3,6 +3,10 @@ package com.canace.novel.dao.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -14,9 +18,12 @@ import java.time.LocalDateTime;
  * @author ${author}
  * @date 2024/01/15
  */
+@Setter
+@Getter
 @TableName("book_info")
 public class BookInfo implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -120,166 +127,6 @@ public class BookInfo implements Serializable {
      */
     private LocalDateTime updateTime;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Byte getWorkDirection() {
-        return workDirection;
-    }
-
-    public void setWorkDirection(Byte workDirection) {
-        this.workDirection = workDirection;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getPicUrl() {
-        return picUrl;
-    }
-
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public String getBookDesc() {
-        return bookDesc;
-    }
-
-    public void setBookDesc(String bookDesc) {
-        this.bookDesc = bookDesc;
-    }
-
-    public Byte getScore() {
-        return score;
-    }
-
-    public void setScore(Byte score) {
-        this.score = score;
-    }
-
-    public Byte getBookStatus() {
-        return bookStatus;
-    }
-
-    public void setBookStatus(Byte bookStatus) {
-        this.bookStatus = bookStatus;
-    }
-
-    public Long getVisitCount() {
-        return visitCount;
-    }
-
-    public void setVisitCount(Long visitCount) {
-        this.visitCount = visitCount;
-    }
-
-    public Integer getWordCount() {
-        return wordCount;
-    }
-
-    public void setWordCount(Integer wordCount) {
-        this.wordCount = wordCount;
-    }
-
-    public Integer getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(Integer commentCount) {
-        this.commentCount = commentCount;
-    }
-
-    public Long getLastChapterId() {
-        return lastChapterId;
-    }
-
-    public void setLastChapterId(Long lastChapterId) {
-        this.lastChapterId = lastChapterId;
-    }
-
-    public String getLastChapterName() {
-        return lastChapterName;
-    }
-
-    public void setLastChapterName(String lastChapterName) {
-        this.lastChapterName = lastChapterName;
-    }
-
-    public LocalDateTime getLastChapterUpdateTime() {
-        return lastChapterUpdateTime;
-    }
-
-    public void setLastChapterUpdateTime(LocalDateTime lastChapterUpdateTime) {
-        this.lastChapterUpdateTime = lastChapterUpdateTime;
-    }
-
-    public Byte getIsVip() {
-        return isVip;
-    }
-
-    public void setIsVip(Byte isVip) {
-        this.isVip = isVip;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
 
     @Override
     public String toString() {

@@ -9,6 +9,7 @@ import com.canace.novel.dao.mapper.BookInfoMapper;
 import com.canace.novel.dao.mapper.HomeBookMapper;
 import com.canace.novel.dto.resp.HomeBookRespDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -62,11 +63,8 @@ public class HomeBookCacheManager {
                     // 根据书籍 id 从map中获取书籍信息
                     BookInfo bookInfo = bookInfoMap.get(v.getBookId());
                     HomeBookRespDto homeBookRespDto = new HomeBookRespDto();
+                    BeanUtils.copyProperties(bookInfo, homeBookRespDto);
                     homeBookRespDto.setBookId(v.getBookId());
-                    homeBookRespDto.setBookName(bookInfo.getBookName());
-                    homeBookRespDto.setAuthorName(bookInfo.getAuthorName());
-                    homeBookRespDto.setPicUrl(bookInfo.getPicUrl());
-                    homeBookRespDto.setBookDesc(bookInfo.getBookDesc());
                     homeBookRespDto.setType(Integer.valueOf(v.getType()));
                     return homeBookRespDto;
                 }).toList();
