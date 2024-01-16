@@ -1,6 +1,6 @@
 package com.canace.novel.core.config;
 
-import com.canace.novel.core.common.constant.CacheConsts;
+import com.canace.novel.core.constant.CacheConsts;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCache;
