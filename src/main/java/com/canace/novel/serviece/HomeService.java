@@ -2,6 +2,7 @@ package com.canace.novel.serviece;
 
 import com.canace.novel.core.common.resp.RestResp;
 import com.canace.novel.dto.resp.HomeBookRespDto;
+import com.canace.novel.dto.resp.HomeFriendLinkRespDto;
 
 import java.util.List;
 
@@ -17,4 +18,9 @@ public interface HomeService {
      * 查询首页的小说推荐
      */
     RestResp<List<HomeBookRespDto>> listHomeBook();
+
+    /**
+     * 首页友链查询接口
+     */
+    RestResp<List<HomeFriendLinkRespDto>> listHomeFriendLink();
 }

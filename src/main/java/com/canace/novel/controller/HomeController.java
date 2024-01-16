@@ -3,6 +3,7 @@ package com.canace.novel.controller;
 import com.canace.novel.core.common.resp.RestResp;
 import com.canace.novel.core.constant.ApiRouterConsts;
 import com.canace.novel.dto.resp.HomeBookRespDto;
+import com.canace.novel.dto.resp.HomeFriendLinkRespDto;
 import com.canace.novel.serviece.HomeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,5 +35,11 @@ public class HomeController {
     @GetMapping("books")
     public RestResp<List<HomeBookRespDto>> listHomeBook() {
         return homeService.listHomeBook();
+    }
+
+    @Operation(summary = "首页友链查询接口")
+    @GetMapping("friend_Link/list")
+    public RestResp<List<HomeFriendLinkRespDto>> listHomeFriendLink() {
+        return homeService.listHomeFriendLink();
     }
 }
