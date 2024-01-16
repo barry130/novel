@@ -14,4 +14,8 @@ import java.util.List;
 public interface BookRankService {
 
     RestResp<List<BookRankRespDto>> listBookRankByVisit();
+
+    RestResp<List<BookRankRespDto>> listBookRankByCreateTime();
+
+    RestResp<List<BookRankRespDto>> listBookRankByUpdateTime();
 }

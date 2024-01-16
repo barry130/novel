@@ -40,16 +40,40 @@ public class BookRankCacheManager {
     }
 
     /**
+     * 新书排行，以书籍的创建时间进行排序
+     */
+    @Cacheable(cacheManager = CacheConsts.CAFFEINE_CACHE_MANAGER, value = CacheConsts.BOOK_NEWEST_RANK_CACHE_NAME)
+    public List<BookRankRespDto> listBookRankByCreateTime() {
+        QueryWrapper<BookInfo> bookInfoQueryWrapper = new QueryWrapper<>();
+        // 根据创建时间排行
+        bookInfoQueryWrapper.orderByDesc(DatabaseConsts.CommonColumnEnum.CREATE_TIME.getName());
+        return getBookRankRespDto(bookInfoQueryWrapper);
+    }
+
+    /**
+     * 书籍更新排行，以书籍的更新时间进行排序
+     */
+    @Cacheable(cacheManager = CacheConsts.CAFFEINE_CACHE_MANAGER, value = CacheConsts.BOOK_UPDATE_RANK_CACHE_NAME)
+    public List<BookRankRespDto> listBookRankByUpdateTime() {
+        QueryWrapper<BookInfo> bookInfoQueryWrapper = new QueryWrapper<>();
+        // 根据创建时间排行
+        bookInfoQueryWrapper.orderByDesc(DatabaseConsts.CommonColumnEnum.UPDATE_TIME.getName());
+        return getBookRankRespDto(bookInfoQueryWrapper);
+    }
+
+
+    /**
      * 对公共方法进行封装
+     *
      * @param bookInfoQueryWrapper 查询条件
      * @return 书籍排行dto
      */
     private List<BookRankRespDto> getBookRankRespDto(QueryWrapper<BookInfo> bookInfoQueryWrapper) {
         // 只查询字数大于0的前30条数据
-        bookInfoQueryWrapper.gt(DatabaseConsts.BookTable.COLUMN_WORD_COUNT,0).last(DatabaseConsts.SqlEnum.LIMIT_30.getSql());
+        bookInfoQueryWrapper.gt(DatabaseConsts.BookTable.COLUMN_WORD_COUNT, 0).last(DatabaseConsts.SqlEnum.LIMIT_30.getSql());
         // 获取结果
         List<BookInfo> bookInfos = bookInfoMapper.selectList(bookInfoQueryWrapper);
-        if (!CollectionUtils.isEmpty(bookInfos)){
+        if (!CollectionUtils.isEmpty(bookInfos)) {
             // 封装返回结果
             return bookInfos.stream().map(bookInfo -> {
                 BookRankRespDto bookRankRespDto = new BookRankRespDto();

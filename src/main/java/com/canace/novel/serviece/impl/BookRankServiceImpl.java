@@ -20,8 +20,19 @@ import java.util.List;
 public class BookRankServiceImpl implements BookRankService {
 
     private final BookRankCacheManager bookRankCacheManager;
+
     @Override
     public RestResp<List<BookRankRespDto>> listBookRankByVisit() {
-        return  RestResp.ok(bookRankCacheManager.listBookRankByVisit());
+        return RestResp.ok(bookRankCacheManager.listBookRankByVisit());
+    }
+
+    @Override
+    public RestResp<List<BookRankRespDto>> listBookRankByCreateTime() {
+        return RestResp.ok(bookRankCacheManager.listBookRankByCreateTime());
+    }
+
+    @Override
+    public RestResp<List<BookRankRespDto>> listBookRankByUpdateTime() {
+        return RestResp.ok(bookRankCacheManager.listBookRankByUpdateTime());
     }
 }

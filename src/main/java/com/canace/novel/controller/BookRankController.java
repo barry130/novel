@@ -28,9 +28,21 @@ public class BookRankController {
 
     private final BookRankService bookRankService;
 
-    @Operation(summary = "首页推荐小说查询接口")
+    @Operation(summary = "书籍点击排行榜接口")
     @GetMapping("visit_rank")
     public RestResp<List<BookRankRespDto>> listBookRankByVisit(){
         return bookRankService.listBookRankByVisit();
+    }
+
+    @Operation(summary = "书籍创建时间(新书)排行榜接口")
+    @GetMapping("newest_rank")
+    public RestResp<List<BookRankRespDto>> listBookRankByCreateTime(){
+        return bookRankService.listBookRankByCreateTime();
+    }
+
+    @Operation(summary = "书籍更新时间排行榜接口")
+    @GetMapping("update_rank")
+    public RestResp<List<BookRankRespDto>> listBookRankByUpdateTime(){
+        return bookRankService.listBookRankByUpdateTime();
     }
 }
