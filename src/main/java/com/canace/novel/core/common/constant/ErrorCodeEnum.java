@@ -23,7 +23,7 @@ public enum ErrorCodeEnum {
     /**
      * 正确执行后的返回
      */
-    OK("00000", "一切 ok"),
+    OK("00000", "success"),
 
     /**
      * 一级宏观错误码，用户端错误

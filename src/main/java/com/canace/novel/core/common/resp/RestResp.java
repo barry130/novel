@@ -16,25 +16,38 @@ import java.util.Objects;
 public class RestResp<T> {
 
     //响应码
-    private String code;
+    private final String code;
 
     //响应信息
-    private String message;
+    private final String message;
 
     //响应数据
     private T data;
 
+    /**
+     * 业务处理成功，无数据返回
+     */
     private RestResp(){
         this.code = ErrorCodeEnum.OK.getCode();
         this.message = ErrorCodeEnum.OK.getMessage();
     }
 
+    /**
+     * 业务处理失败，返回code和message
+     * @param errorCode 错误
+     */
     private RestResp(ErrorCodeEnum errorCode){
         this.code = errorCode.getCode();
         this.message = errorCode.getMessage();
     }
 
+    /**
+     * 业务处理成功，有数据返回
+     * @param data 返回数据
+     */
     private RestResp(T data){
+        this.code = ErrorCodeEnum.OK.getCode();
+        this.message = ErrorCodeEnum.OK.getMessage();
         this.data = data;
     }
 
