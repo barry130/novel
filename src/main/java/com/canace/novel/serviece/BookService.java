@@ -2,6 +2,7 @@ package com.canace.novel.serviece;
 
 import com.canace.novel.core.common.resp.RestResp;
 import com.canace.novel.dto.resp.BookChapterAboutRespDto;
+import com.canace.novel.dto.resp.BookContentAboutRespDto;
 import com.canace.novel.dto.resp.BookInfoRespDto;
 
 /**
@@ -17,4 +18,6 @@ public interface BookService {
     RestResp<Void> addVisitCount(Long bookId);
 
     RestResp<BookChapterAboutRespDto> getLastChapterAbout(Long bookId);
+
+    RestResp<BookContentAboutRespDto> getBookContentAbout(Long chapterId);
 }

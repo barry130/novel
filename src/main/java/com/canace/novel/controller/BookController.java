@@ -3,6 +3,7 @@ package com.canace.novel.controller;
 import com.canace.novel.core.common.resp.RestResp;
 import com.canace.novel.core.constant.ApiRouterConsts;
 import com.canace.novel.dto.resp.BookChapterAboutRespDto;
+import com.canace.novel.dto.resp.BookContentAboutRespDto;
 import com.canace.novel.dto.resp.BookInfoRespDto;
 import com.canace.novel.serviece.BookService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -60,5 +61,15 @@ public class BookController {
     public RestResp<BookChapterAboutRespDto> getLastChapterAbout(
             @Parameter(description = "小说ID") Long bookId) {
         return bookService.getLastChapterAbout(bookId);
+    }
+
+    /**
+     * 小说内容相关信息查询接口
+     */
+    @Operation(summary = "小说内容相关信息查询接口")
+    @GetMapping("content/{chapterId}")
+    public RestResp<BookContentAboutRespDto> getBookContentAbout(
+            @Parameter(description = "章节ID") @PathVariable("chapterId") Long chapterId) {
+        return bookService.getBookContentAbout(chapterId);
     }
 }

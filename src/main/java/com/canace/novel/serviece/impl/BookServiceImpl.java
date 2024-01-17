@@ -4,6 +4,7 @@ import com.canace.novel.core.common.resp.RestResp;
 import com.canace.novel.dao.mapper.BookInfoMapper;
 import com.canace.novel.dto.resp.BookChapterAboutRespDto;
 import com.canace.novel.dto.resp.BookChapterRespDto;
+import com.canace.novel.dto.resp.BookContentAboutRespDto;
 import com.canace.novel.dto.resp.BookInfoRespDto;
 import com.canace.novel.manager.cache.BookChapterCacheManager;
 import com.canace.novel.manager.cache.BookContentCacheManager;
@@ -79,5 +80,31 @@ public class BookServiceImpl implements BookService {
         bookChapterAboutRespDto.setChapterTotal(chapterCount);
 
         return RestResp.ok(bookChapterAboutRespDto);
+    }
+
+    @Override
+    public RestResp<BookContentAboutRespDto> getBookContentAbout(Long chapterId) {
+        // 从章节缓存管理器中读取章节信息
+        BookChapterRespDto chapterInfoById = bookChapterCacheManager.getChapterInfoById(chapterId);
+        if (ObjectUtils.isEmpty(chapterInfoById)){
+            return RestResp.fail();
+        }
+
+        // 从章节内容缓存管理器中读取章节内容
+        String bookContentByChapterId = bookContentCacheManager.getBookContentByChapterId(chapterId);
+
+        //从书籍详情缓存管理器中读取书籍详情
+        BookInfoRespDto bookInfoById = bookInfoCacheManager.getBookInfoById(chapterInfoById.getBookId());
+        if (ObjectUtils.isEmpty(bookInfoById)){
+            return RestResp.fail();
+        }
+
+        // 封装返回结果
+        BookContentAboutRespDto bookContentAboutRespDto = new BookContentAboutRespDto();
+        bookContentAboutRespDto.setChapterInfo(chapterInfoById);
+        bookContentAboutRespDto.setBookContent(bookContentByChapterId);
+        bookContentAboutRespDto.setBookInfo(bookInfoById);
+
+        return RestResp.ok(bookContentAboutRespDto);
     }
 }
