@@ -16,6 +16,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * @author canace
  * @version 1.0
@@ -106,5 +112,30 @@ public class BookServiceImpl implements BookService {
         bookContentAboutRespDto.setBookInfo(bookInfoById);
 
         return RestResp.ok(bookContentAboutRespDto);
+    }
+
+    @Override
+    public RestResp<List<BookInfoRespDto>> listRecBooks(Long bookId) throws NoSuchAlgorithmException {
+        Long categoryId = bookInfoCacheManager.getBookInfoById(bookId).getCategoryId();
+        // 获取当前分类下的最新更新的小说ID列表
+        List<Long> lastUpdateIdList = bookInfoCacheManager.getLastUpdateIdList(categoryId);
+        List<BookInfoRespDto> respDtoList = new ArrayList<>();
+        List<Integer> recIdIndexList = new ArrayList<>();
+        int count = 0;
+        Random rand = SecureRandom.getInstanceStrong();
+        // 推荐四本书籍
+        while (count < 4) {
+            // 从上述分类最新书籍中随机选择
+            int recIdIndex = rand.nextInt(lastUpdateIdList.size());
+            if (!recIdIndexList.contains(recIdIndex)) {
+                recIdIndexList.add(recIdIndex);
+                bookId = lastUpdateIdList.get(recIdIndex);
+                // 根据书籍ID查询书籍信息
+                BookInfoRespDto bookInfo = bookInfoCacheManager.getBookInfoById(bookId);
+                respDtoList.add(bookInfo);
+                count++;
+            }
+        }
+        return RestResp.ok(respDtoList);
     }
 }

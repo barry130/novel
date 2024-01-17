@@ -14,6 +14,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
+import java.util.List;
+
 /**
  * @author canace
  * @version 1.0
@@ -43,11 +45,9 @@ public class BookInfoCacheManager {
         }
         // 查询当前书籍的首个章节ID
         QueryWrapper<BookChapter> bookChapterQueryWrapper = new QueryWrapper<>();
-        bookChapterQueryWrapper.eq(DatabaseConsts.BookChapterTable.COLUMN_BOOK_ID, bookId)
-                .orderByAsc(DatabaseConsts.BookChapterTable.COLUMN_CHAPTER_NUM)
-                .last(DatabaseConsts.SqlEnum.LIMIT_1.getSql());
+        bookChapterQueryWrapper.eq(DatabaseConsts.BookChapterTable.COLUMN_BOOK_ID, bookId).orderByAsc(DatabaseConsts.BookChapterTable.COLUMN_CHAPTER_NUM).last(DatabaseConsts.SqlEnum.LIMIT_1.getSql());
         BookChapter bookChapter = bookChapterMapper.selectOne(bookChapterQueryWrapper);
-        if(ObjectUtils.isEmpty(bookChapter)){
+        if (ObjectUtils.isEmpty(bookChapter)) {
             return null;
         }
 
@@ -59,4 +59,14 @@ public class BookInfoCacheManager {
         return bookInfoRespDto;
     }
 
+
+    /**
+     * 查询每个类别下最新更新的 500 个小说ID列表，并放入缓存中 1 个小时
+     */
+    @Cacheable(cacheManager = CacheConsts.CAFFEINE_CACHE_MANAGER, value = CacheConsts.LAST_UPDATE_BOOK_ID_LIST_CACHE_NAME)
+    public List<Long> getLastUpdateIdList(Long categoryId) {
+        QueryWrapper<BookInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(DatabaseConsts.BookTable.COLUMN_CATEGORY_ID, categoryId).gt(DatabaseConsts.BookTable.COLUMN_WORD_COUNT, 0).orderByDesc(DatabaseConsts.BookTable.COLUMN_LAST_CHAPTER_UPDATE_TIME).last(DatabaseConsts.SqlEnum.LIMIT_500.getSql());
+        return bookInfoMapper.selectList(queryWrapper).stream().map(BookInfo::getId).toList();
+    }
 }

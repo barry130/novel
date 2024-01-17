@@ -5,6 +5,9 @@ import com.canace.novel.dto.resp.BookChapterAboutRespDto;
 import com.canace.novel.dto.resp.BookContentAboutRespDto;
 import com.canace.novel.dto.resp.BookInfoRespDto;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
 /**
  * @author canace
  * @version 1.0
@@ -20,4 +23,6 @@ public interface BookService {
     RestResp<BookChapterAboutRespDto> getLastChapterAbout(Long bookId);
 
     RestResp<BookContentAboutRespDto> getBookContentAbout(Long chapterId);
+
+    RestResp<List<BookInfoRespDto>> listRecBooks(Long bookId) throws NoSuchAlgorithmException;
 }

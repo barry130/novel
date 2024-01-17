@@ -16,6 +16,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
 /**
  * @author canace
  * @version 1.0
@@ -71,5 +74,15 @@ public class BookController {
     public RestResp<BookContentAboutRespDto> getBookContentAbout(
             @Parameter(description = "章节ID") @PathVariable("chapterId") Long chapterId) {
         return bookService.getBookContentAbout(chapterId);
+    }
+
+    /**
+     * 小说推荐列表查询接口
+     */
+    @Operation(summary = "小说推荐列表查询接口")
+    @GetMapping("rec_list")
+    public RestResp<List<BookInfoRespDto>> listRecBooks(
+            @Parameter(description = "小说ID") Long bookId) throws NoSuchAlgorithmException {
+        return bookService.listRecBooks(bookId);
     }
 }
