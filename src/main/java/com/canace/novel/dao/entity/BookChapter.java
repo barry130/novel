@@ -3,6 +3,10 @@ package com.canace.novel.dao.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -14,9 +18,12 @@ import java.time.LocalDateTime;
  * @author ${author}
  * @date 2024/01/15
  */
+@Setter
+@Getter
 @TableName("book_chapter")
 public class BookChapter implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
@@ -51,70 +58,6 @@ public class BookChapter implements Serializable {
 
     private LocalDateTime updateTime;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
-
-    public Short getChapterNum() {
-        return chapterNum;
-    }
-
-    public void setChapterNum(Short chapterNum) {
-        this.chapterNum = chapterNum;
-    }
-
-    public String getChapterName() {
-        return chapterName;
-    }
-
-    public void setChapterName(String chapterName) {
-        this.chapterName = chapterName;
-    }
-
-    public Integer getWordCount() {
-        return wordCount;
-    }
-
-    public void setWordCount(Integer wordCount) {
-        this.wordCount = wordCount;
-    }
-
-    public Byte getIsVip() {
-        return isVip;
-    }
-
-    public void setIsVip(Byte isVip) {
-        this.isVip = isVip;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
 
     @Override
     public String toString() {

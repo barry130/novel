@@ -1,5 +1,7 @@
 package com.canace.novel.core.constant;
 
+import lombok.Getter;
+
 /**
  * @author canace
  * @version 1.0
@@ -69,6 +71,11 @@ public class CacheConsts {
     public static final String BOOK_CHAPTER_CACHE_NAME = "bookChapterCache";
 
     /**
+     * 小说章节总数缓存
+     */
+    public static final String BOOK_CHAPTER_COUNT_CACHE_NAME = "bookChapterCountCache";
+
+    /**
      * 小说内容缓存
      */
     public static final String BOOK_CONTENT_CACHE_NAME = "bookContentCache";
@@ -117,6 +124,8 @@ public class CacheConsts {
 
         BOOK_CHAPTER_CACHE(0, BOOK_CHAPTER_CACHE_NAME, 60 * 60 * 6, 5000),
 
+        BOOK_CHAPTER_COUNT_CACHE(0, BOOK_CHAPTER_COUNT_CACHE_NAME, 60 * 60 * 6, 1),
+
         BOOK_CONTENT_CACHE(2, BOOK_CONTENT_CACHE_NAME, 60 * 60 * 12, 3000),
 
         LAST_UPDATE_BOOK_ID_LIST_CACHE(0, LAST_UPDATE_BOOK_ID_LIST_CACHE_NAME, 60 * 60, 10),
@@ -128,19 +137,22 @@ public class CacheConsts {
         /**
          * 缓存类型 0-本地 1-本地和远程 2-远程
          */
-        private int type;
+        private final int type;
         /**
          * 缓存的名字
          */
-        private String name;
+        @Getter
+        private final String name;
         /**
          * 失效时间（秒） 0-永不失效
          */
-        private int ttl;
+        @Getter
+        private final int ttl;
         /**
          * 最大容量
          */
-        private int maxSize;
+        @Getter
+        private final int maxSize;
 
         CacheEnum(int type, String name, int ttl, int maxSize) {
             this.type = type;
@@ -155,18 +167,6 @@ public class CacheConsts {
 
         public boolean isRemote() {
             return type >= 1;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getTtl() {
-            return ttl;
-        }
-
-        public int getMaxSize() {
-            return maxSize;
         }
 
     }
