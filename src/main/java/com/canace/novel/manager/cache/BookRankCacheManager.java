@@ -7,6 +7,7 @@ import com.canace.novel.dao.entity.BookInfo;
 import com.canace.novel.dao.mapper.BookInfoMapper;
 import com.canace.novel.dto.resp.BookRankRespDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class BookRankCacheManager {
 
     private final BookInfoMapper bookInfoMapper;
@@ -82,6 +84,7 @@ public class BookRankCacheManager {
                 return bookRankRespDto;
             }).toList();
         }
+        log.error("查询书籍排行榜失败，查询条件为：{}", bookInfoQueryWrapper);
         return Collections.emptyList();
     }
 }

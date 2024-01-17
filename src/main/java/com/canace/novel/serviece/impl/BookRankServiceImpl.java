@@ -23,16 +23,25 @@ public class BookRankServiceImpl implements BookRankService {
 
     @Override
     public RestResp<List<BookRankRespDto>> listBookRankByVisit() {
+        if (bookRankCacheManager.listBookRankByVisit().isEmpty()) {
+            return RestResp.fail();
+        }
         return RestResp.ok(bookRankCacheManager.listBookRankByVisit());
     }
 
     @Override
     public RestResp<List<BookRankRespDto>> listBookRankByCreateTime() {
+        if (bookRankCacheManager.listBookRankByCreateTime().isEmpty()) {
+            return RestResp.fail();
+        }
         return RestResp.ok(bookRankCacheManager.listBookRankByCreateTime());
     }
 
     @Override
     public RestResp<List<BookRankRespDto>> listBookRankByUpdateTime() {
+        if (bookRankCacheManager.listBookRankByUpdateTime().isEmpty()) {
+            return RestResp.fail();
+        }
         return RestResp.ok(bookRankCacheManager.listBookRankByUpdateTime());
     }
 }

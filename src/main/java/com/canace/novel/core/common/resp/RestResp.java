@@ -73,9 +73,16 @@ public class RestResp<T> {
     }
 
     /**
-     * 系统错误
+     * 业务处理失败(数据获取失败)
      */
-    public static RestResp<Void> error() {
+    public static <T> RestResp<T> fail() {
+        return new RestResp<>(ErrorCodeEnum.SYSTEM_DATA_ERROR);
+    }
+
+    /**
+     * 系统错误(通用)
+     */
+    public static <T> RestResp<T> error() {
         return new RestResp<>(ErrorCodeEnum.SYSTEM_ERROR);
     }
 

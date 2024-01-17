@@ -30,12 +30,18 @@ public class HomeServiceImpl implements HomeService {
      */
     @Override
     public RestResp<List<HomeBookRespDto>> listHomeBook() {
+        if (homeBookCacheManager.listHomeBook().isEmpty()) {
+            return RestResp.fail();
+        }
         //直接从缓存管理器中获取数据
         return RestResp.ok(homeBookCacheManager.listHomeBook());
     }
 
     @Override
     public RestResp<List<HomeFriendLinkRespDto>> listHomeFriendLink() {
+        if (homeFriendLinkCacheManager.listHomeFriendLink().isEmpty()) {
+            return RestResp.fail();
+        }
         return RestResp.ok(homeFriendLinkCacheManager.listHomeFriendLink());
     }
 }

@@ -131,6 +131,11 @@ public enum ErrorCodeEnum {
     SYSTEM_TIMEOUT_ERROR("B0100", "系统执行超时"),
 
     /**
+     * 二级宏观错误码，数据获取失败
+     */
+    SYSTEM_DATA_ERROR("B0101", "数据获取失败"),
+
+    /**
      * 一级宏观错误码，调用第三方服务出错
      */
     THIRD_SERVICE_ERROR("C0001", "调用第三方服务出错"),

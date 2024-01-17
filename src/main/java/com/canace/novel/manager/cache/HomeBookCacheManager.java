@@ -9,6 +9,7 @@ import com.canace.novel.dao.mapper.BookInfoMapper;
 import com.canace.novel.dao.mapper.HomeBookMapper;
 import com.canace.novel.dto.resp.HomeBookRespDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor //简化@Autowired的写法
+@Slf4j
 public class HomeBookCacheManager {
 
     private final HomeBookMapper homeBookMapper;
@@ -69,7 +71,9 @@ public class HomeBookCacheManager {
                     return homeBookRespDto;
                 }).toList();
             }
+            log.error("根据书籍ID获取书籍失败，书籍信息列表为空");
         }
+        log.error("查询首页推荐的书籍失败，首页推荐书籍列表空");
         return Collections.emptyList();
     }
 }

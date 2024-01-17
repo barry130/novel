@@ -3,12 +3,11 @@ package com.canace.novel.manager.cache;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.canace.novel.core.constant.CacheConsts;
 import com.canace.novel.core.constant.DatabaseConsts;
-import com.canace.novel.dao.entity.BookInfo;
 import com.canace.novel.dao.entity.HomeFriendLink;
 import com.canace.novel.dao.mapper.HomeFriendLinkMapper;
-import com.canace.novel.dto.resp.BookRankRespDto;
 import com.canace.novel.dto.resp.HomeFriendLinkRespDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -26,6 +25,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class HomeFriendLinkCacheManager {
 
     private final HomeFriendLinkMapper homeFriendLinkMapper;
@@ -48,6 +48,7 @@ public class HomeFriendLinkCacheManager {
                 return homeFriendLinkRespDto;
             }).toList();
         }
+        log.error("获取友链列表失败，结果为空");
         return Collections.emptyList();
     }
 }
