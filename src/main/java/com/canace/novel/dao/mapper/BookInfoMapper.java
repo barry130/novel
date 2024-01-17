@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface BookInfoMapper extends BaseMapper<BookInfo> {
 
+    void addVisitCount(Long bookId);
 }
