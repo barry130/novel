@@ -3,10 +3,8 @@ package com.canace.novel.serviece.impl;
 import com.canace.novel.core.common.constant.ErrorCodeEnum;
 import com.canace.novel.core.common.resp.RestResp;
 import com.canace.novel.dao.mapper.BookInfoMapper;
-import com.canace.novel.dto.resp.BookChapterAboutRespDto;
-import com.canace.novel.dto.resp.BookChapterRespDto;
-import com.canace.novel.dto.resp.BookContentAboutRespDto;
-import com.canace.novel.dto.resp.BookInfoRespDto;
+import com.canace.novel.dto.resp.*;
+import com.canace.novel.manager.cache.BookCategoryCacheManager;
 import com.canace.novel.manager.cache.BookChapterCacheManager;
 import com.canace.novel.manager.cache.BookContentCacheManager;
 import com.canace.novel.manager.cache.BookInfoCacheManager;
@@ -42,6 +40,8 @@ public class BookServiceImpl implements BookService {
     private final BookChapterCacheManager bookChapterCacheManager;
 
     private final BookContentCacheManager bookContentCacheManager;
+
+    private final BookCategoryCacheManager bookCategoryCacheManager;
 
     @Override
     public RestResp<BookInfoRespDto> getBookInfoById(Long bookId) {
@@ -198,5 +198,14 @@ public class BookServiceImpl implements BookService {
     @Override
     public RestResp<Long> getNextChapterId(Long chapterId) {
         return getChapterIdIndex(chapterId, 2);
+    }
+
+    @Override
+    public RestResp<List<BookCategoryRespDto>> listCategory(Integer workDirection) {
+        List<BookCategoryRespDto> bookCategoryRespDto = bookCategoryCacheManager.listCategory(workDirection);
+        if (CollectionUtils.isEmpty(bookCategoryRespDto)){
+            return RestResp.fail();
+        }
+        return RestResp.ok(bookCategoryRespDto);
     }
 }

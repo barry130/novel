@@ -2,10 +2,7 @@ package com.canace.novel.controller;
 
 import com.canace.novel.core.common.resp.RestResp;
 import com.canace.novel.core.constant.ApiRouterConsts;
-import com.canace.novel.dto.resp.BookChapterAboutRespDto;
-import com.canace.novel.dto.resp.BookChapterRespDto;
-import com.canace.novel.dto.resp.BookContentAboutRespDto;
-import com.canace.novel.dto.resp.BookInfoRespDto;
+import com.canace.novel.dto.resp.*;
 import com.canace.novel.serviece.BookService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -117,5 +114,15 @@ public class BookController {
     public RestResp<Long> getNextChapterId(
             @Parameter(description = "章节ID") @PathVariable("chapterId") Long chapterId) {
         return bookService.getNextChapterId(chapterId);
+    }
+
+    /**
+     * 小说分类列表查询接口
+     */
+    @Operation(summary = "小说分类列表查询接口")
+    @GetMapping("category/list")
+    public RestResp<List<BookCategoryRespDto>> listCategory(
+            @Parameter(description = "作品方向", required = true) Integer workDirection) {
+        return bookService.listCategory(workDirection);
     }
 }

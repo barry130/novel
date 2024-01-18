@@ -1,10 +1,7 @@
 package com.canace.novel.serviece;
 
 import com.canace.novel.core.common.resp.RestResp;
-import com.canace.novel.dto.resp.BookChapterAboutRespDto;
-import com.canace.novel.dto.resp.BookChapterRespDto;
-import com.canace.novel.dto.resp.BookContentAboutRespDto;
-import com.canace.novel.dto.resp.BookInfoRespDto;
+import com.canace.novel.dto.resp.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -32,4 +29,6 @@ public interface BookService {
     RestResp<Long> getPreChapterId(Long chapterId);
 
     RestResp<Long> getNextChapterId(Long chapterId);
+
+    RestResp<List<BookCategoryRespDto>> listCategory(Integer workDirection);
 }
