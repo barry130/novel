@@ -1,13 +1,14 @@
 package com.canace.novel.serviece.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.canace.novel.core.common.constant.ErrorCodeEnum;
+import com.canace.novel.core.common.req.PageReqDto;
+import com.canace.novel.core.common.resp.PageRespDto;
 import com.canace.novel.core.common.resp.RestResp;
+import com.canace.novel.dao.entity.BookComment;
 import com.canace.novel.dao.mapper.BookInfoMapper;
 import com.canace.novel.dto.resp.*;
-import com.canace.novel.manager.cache.BookCategoryCacheManager;
-import com.canace.novel.manager.cache.BookChapterCacheManager;
-import com.canace.novel.manager.cache.BookContentCacheManager;
-import com.canace.novel.manager.cache.BookInfoCacheManager;
+import com.canace.novel.manager.cache.*;
 import com.canace.novel.serviece.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,8 @@ public class BookServiceImpl implements BookService {
     private final BookContentCacheManager bookContentCacheManager;
 
     private final BookCategoryCacheManager bookCategoryCacheManager;
+
+    private final BookCommentCacheManager bookCommentCacheManager;
 
     @Override
     public RestResp<BookInfoRespDto> getBookInfoById(Long bookId) {
@@ -207,5 +210,17 @@ public class BookServiceImpl implements BookService {
             return RestResp.fail();
         }
         return RestResp.ok(bookCategoryRespDto);
+    }
+
+    @Override
+    public RestResp<BookCommentRespDto> listNewestComments(Long bookId) {
+        PageReqDto pageReqDto = new PageReqDto();
+        pageReqDto.setPageNum(1);
+        pageReqDto.setPageSize(10);
+        BookCommentRespDto bookCommentRespDto = bookCommentCacheManager.listComments(bookId, pageReqDto);
+        if(ObjectUtils.isEmpty(bookCommentRespDto)){
+            return RestResp.fail();
+        }
+        return RestResp.ok(bookCommentRespDto);
     }
 }

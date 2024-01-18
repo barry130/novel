@@ -86,6 +86,11 @@ public class CacheConsts {
     public static final String BOOK_CONTENT_CACHE_NAME = "bookContentCache";
 
     /**
+     * 书籍评论缓存(分页)
+     */
+    public static final String BOOK_COMMENT_CACHE_NAME = "bookCommentContentCache";
+
+    /**
      * 最近更新小说ID列表缓存
      */
     public static final String LAST_UPDATE_BOOK_ID_LIST_CACHE_NAME = "lastUpdateBookIdListCache";
@@ -134,6 +139,8 @@ public class CacheConsts {
         BOOK_ALL_CHAPTER_CACHE(0, BOOK_ALL_CHAPTER_CACHE_NAME, 60 * 60 * 6, 5000),
 
         BOOK_CONTENT_CACHE(2, BOOK_CONTENT_CACHE_NAME, 60 * 60 * 12, 3000),
+
+        BOOK_COMMENT_CACHE(0, BOOK_COMMENT_CACHE_NAME, 60 * 60, 10),
 
         LAST_UPDATE_BOOK_ID_LIST_CACHE(0, LAST_UPDATE_BOOK_ID_LIST_CACHE_NAME, 60 * 60, 10),
 

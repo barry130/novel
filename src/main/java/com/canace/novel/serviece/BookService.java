@@ -31,4 +31,6 @@ public interface BookService {
     RestResp<Long> getNextChapterId(Long chapterId);
 
     RestResp<List<BookCategoryRespDto>> listCategory(Integer workDirection);
+
+    RestResp<BookCommentRespDto> listNewestComments(Long bookId);
 }
