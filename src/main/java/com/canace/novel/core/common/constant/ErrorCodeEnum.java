@@ -111,6 +111,16 @@ public enum ErrorCodeEnum {
     AUTHOR_BOOK_NAME_EXIST("A3001", "小说名已存在"),
 
     /**
+     * 当前章节已为起始章节或最新章节
+     */
+    BOOK_CHAPTER_IS_FIRST_NEW("A3002", "当前章节已为起始章节或最新章节"),
+
+    /**
+     * 当前章节不存在当前书籍中
+     */
+    BOOK_CHAPTER_IS_NULL("A3003", "当前章节不存在当前书籍中"),
+
+    /**
      * 用户上传文件异常
      */
     USER_UPLOAD_FILE_ERROR("A0700", "用户上传文件异常"),

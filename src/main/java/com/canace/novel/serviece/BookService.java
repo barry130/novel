@@ -28,4 +28,8 @@ public interface BookService {
     RestResp<List<BookInfoRespDto>> listRecBooks(Long bookId) throws NoSuchAlgorithmException;
 
     RestResp<List<BookChapterRespDto>> listBookChapter(Long bookId);
+
+    RestResp<Long> getPreChapterId(Long chapterId);
+
+    RestResp<Long> getNextChapterId(Long chapterId);
 }

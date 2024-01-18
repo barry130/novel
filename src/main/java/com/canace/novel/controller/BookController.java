@@ -87,10 +87,35 @@ public class BookController {
         return bookService.listRecBooks(bookId);
     }
 
+    /**
+     * 数据全部章节查询
+     * @param bookId 书籍ID
+     * @return 书籍全部章节信息
+     */
     @Operation(summary = "小说全部章节查询")
     @GetMapping("chapter/list")
     public RestResp<List<BookChapterRespDto>> listBookChapter(
             @Parameter(description = "小说ID")  @RequestParam("bookId") Long bookId) {
         return bookService.listBookChapter(bookId);
+    }
+
+    /**
+     * 获取上一章节ID接口
+     */
+    @Operation(summary = "获取上一章节ID接口")
+    @GetMapping("pre_chapter_id/{chapterId}")
+    public RestResp<Long> getPreChapterId(
+            @Parameter(description = "章节ID") @PathVariable("chapterId") Long chapterId) {
+        return bookService.getPreChapterId(chapterId);
+    }
+
+    /**
+     * 获取下一章节ID接口
+     */
+    @Operation(summary = "获取下一章节ID接口")
+    @GetMapping("next_chapter_id/{chapterId}")
+    public RestResp<Long> getNextChapterId(
+            @Parameter(description = "章节ID") @PathVariable("chapterId") Long chapterId) {
+        return bookService.getNextChapterId(chapterId);
     }
 }

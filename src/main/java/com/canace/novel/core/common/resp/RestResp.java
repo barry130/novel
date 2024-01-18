@@ -66,17 +66,17 @@ public class RestResp<T> {
     }
 
     /**
-     * 业务处理失败
-     */
-    public static RestResp<Void> fail(ErrorCodeEnum errorCode) {
-        return new RestResp<>(errorCode);
-    }
-
-    /**
      * 业务处理失败(数据获取失败)
      */
     public static <T> RestResp<T> fail() {
         return new RestResp<>(ErrorCodeEnum.SYSTEM_DATA_ERROR);
+    }
+
+    /**
+     * 业务处理失败(返回通用)
+     */
+    public static <T> RestResp<T> fail(ErrorCodeEnum errorCode) {
+        return new RestResp<>(errorCode);
     }
 
     /**
