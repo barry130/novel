@@ -3,6 +3,7 @@ package com.canace.novel.controller;
 import com.canace.novel.core.common.resp.RestResp;
 import com.canace.novel.core.constant.ApiRouterConsts;
 import com.canace.novel.dto.resp.BookChapterAboutRespDto;
+import com.canace.novel.dto.resp.BookChapterRespDto;
 import com.canace.novel.dto.resp.BookContentAboutRespDto;
 import com.canace.novel.dto.resp.BookInfoRespDto;
 import com.canace.novel.serviece.BookService;
@@ -84,5 +85,12 @@ public class BookController {
     public RestResp<List<BookInfoRespDto>> listRecBooks(
             @Parameter(description = "小说ID") Long bookId) throws NoSuchAlgorithmException {
         return bookService.listRecBooks(bookId);
+    }
+
+    @Operation(summary = "小说全部章节查询")
+    @GetMapping("chapter/list")
+    public RestResp<List<BookChapterRespDto>> listBookChapter(
+            @Parameter(description = "小说ID")  @RequestParam("bookId") Long bookId) {
+        return bookService.listBookChapter(bookId);
     }
 }

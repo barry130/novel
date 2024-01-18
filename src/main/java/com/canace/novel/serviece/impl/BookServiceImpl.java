@@ -138,4 +138,14 @@ public class BookServiceImpl implements BookService {
         }
         return RestResp.ok(respDtoList);
     }
+
+    @Override
+    public RestResp<List<BookChapterRespDto>> listBookChapter(Long bookId) {
+        // 从章节缓存管理器中读取数据
+        List<BookChapterRespDto> list = bookChapterCacheManager.listBookChapter(bookId);
+        if(list.isEmpty()){
+            return RestResp.fail();
+        }
+        return RestResp.ok(list);
+    }
 }

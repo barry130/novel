@@ -76,6 +76,11 @@ public class CacheConsts {
     public static final String BOOK_CHAPTER_COUNT_CACHE_NAME = "bookChapterCountCache";
 
     /**
+     * 小说全部章节信息缓存
+     */
+    public static final String BOOK_ALL_CHAPTER_CACHE_NAME = "bookAllChapterCache";
+
+    /**
      * 小说内容缓存
      */
     public static final String BOOK_CONTENT_CACHE_NAME = "bookContentCache";
@@ -125,6 +130,8 @@ public class CacheConsts {
         BOOK_CHAPTER_CACHE(0, BOOK_CHAPTER_CACHE_NAME, 60 * 60 * 6, 5000),
 
         BOOK_CHAPTER_COUNT_CACHE(0, BOOK_CHAPTER_COUNT_CACHE_NAME, 60 * 60 * 6, 1),
+
+        BOOK_ALL_CHAPTER_CACHE(0, BOOK_ALL_CHAPTER_CACHE_NAME, 60 * 60 * 6, 5000),
 
         BOOK_CONTENT_CACHE(2, BOOK_CONTENT_CACHE_NAME, 60 * 60 * 12, 3000),
 

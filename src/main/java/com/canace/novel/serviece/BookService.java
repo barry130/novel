@@ -2,6 +2,7 @@ package com.canace.novel.serviece;
 
 import com.canace.novel.core.common.resp.RestResp;
 import com.canace.novel.dto.resp.BookChapterAboutRespDto;
+import com.canace.novel.dto.resp.BookChapterRespDto;
 import com.canace.novel.dto.resp.BookContentAboutRespDto;
 import com.canace.novel.dto.resp.BookInfoRespDto;
 
@@ -25,4 +26,6 @@ public interface BookService {
     RestResp<BookContentAboutRespDto> getBookContentAbout(Long chapterId);
 
     RestResp<List<BookInfoRespDto>> listRecBooks(Long bookId) throws NoSuchAlgorithmException;
+
+    RestResp<List<BookChapterRespDto>> listBookChapter(Long bookId);
 }
