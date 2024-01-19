@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 /**
  * @author canace
  * @version 1.0
@@ -31,7 +33,7 @@ public class SearchController {
 
     @Operation(summary = "搜索书籍")
     @GetMapping("books")
-    public RestResp<PageRespDto<BookInfoRespDto>> searchBooks(@ParameterObject BookSearchReqDto bookSearchReqDto){
+    public RestResp<PageRespDto<BookInfoRespDto>> searchBooks(@ParameterObject BookSearchReqDto bookSearchReqDto) throws IOException {
         return searchService.searchBooks(bookSearchReqDto);
     }
 }

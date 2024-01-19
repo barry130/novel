@@ -1,7 +1,9 @@
 package com.canace.novel.dto.resp;
 
+import co.elastic.clients.elasticsearch.ml.DataframeAnalytics;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -112,4 +114,5 @@ public class BookInfoRespDto {
     @Schema(description = "最新章节更新时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime updateTime;
+
 }
