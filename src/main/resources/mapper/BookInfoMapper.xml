@@ -6,4 +6,38 @@
         set visit_count = visit_count + 1
         where id = #{bookId}
     </update>
+
+    <select id="searchBooks" parameterType="com.canace.novel.dto.req.BookSearchReqDto" resultType="com.canace.novel.dao.entity.BookInfo">
+        select
+        id,category_id,category_name,book_name,author_id,author_name,word_count,last_chapter_name
+        from book_info where word_count > 0
+        <if test="bookSearchReqDto.keyword != null and bookSearchReqDto.keyword != ''">
+            and (book_name like concat('%',#{bookSearchReqDto.keyword},'%') or author_name like
+            concat('%',#{bookSearchReqDto.keyword},'%'))
+        </if>
+        <if test="bookSearchReqDto.workDirection != null">
+            and work_direction = #{bookSearchReqDto.workDirection}
+        </if>
+        <if test="bookSearchReqDto.categoryId != null">
+            and category_id = #{bookSearchReqDto.categoryId}
+        </if>
+        <if test="bookSearchReqDto.isVip != null">
+            and is_vip = #{bookSearchReqDto.isVip}
+        </if>
+        <if test="bookSearchReqDto.bookStatus != null">
+            and book_status = #{bookSearchReqDto.bookStatus}
+        </if>
+        <if test="bookSearchReqDto.wordCountMin != null">
+            and word_count >= #{bookSearchReqDto.wordCountMin}
+        </if>
+        <if test="bookSearchReqDto.wordCountMax != null">
+            and word_count <![CDATA[ < ]]> #{bookSearchReqDto.wordCountMax}
+        </if>
+        <if test="bookSearchReqDto.updateTimeMin != null">
+            and last_chapter_update_time >= #{bookSearchReqDto.updateTimeMin}
+        </if>
+        <if test="bookSearchReqDto.sort != null">
+            order by ${bookSearchReqDto.sort}
+        </if>
+    </select>
 </mapper>
